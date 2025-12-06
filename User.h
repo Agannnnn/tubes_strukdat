@@ -11,7 +11,7 @@
 using namespace std;
 
 namespace user {
-    typedef struct User *address;
+    typedef struct Elm *address;
 
     struct Elm {
         string username;

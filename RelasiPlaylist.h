@@ -42,6 +42,16 @@ namespace relasi_playlist {
     address allocateElm(playlist::address p, lagu::address l);
 
     /**
+     * I.S. list yang ingin diperiksa diberikan sebagai argumen
+     *
+     * F.S. fungsi mengembalikan status apakah list kosong atau tidak sebagai boolean
+     *
+     * @param L list yang sedang dioperasikan
+     * @return status apakah list kosong (true) atau tidak (false)
+     */
+    bool isEmpty(List L);
+
+    /**
      * I.S. list yang ingin dioperasikan dan address elemen relasi yang ingin ditambahkan diberikan sebagai argumen
      *
      * F.S. address elemen relasi yang ingin ditambahkan disimpan sebagai elemen terakhir pada list
@@ -79,9 +89,9 @@ namespace relasi_playlist {
      * F.S. seluruh relasi yang berisi lagu tersebut terhapus dari list relasi
      *
      * @param L list relasi yang sedang dioperasikan
-     * @param p address lagu yang relasinya ingin dihapus
+     * @param l address lagu yang relasinya ingin dihapus
      */
-    void deleteLagu(List &L, lagu::address &p);
+    void deleteLagu(List &L, lagu::address &l);
 
     /**
      * I.S. list relasi yang sedang dioperasikan dan address playlist yang ingin dihapus relasinya diberikan sebagai argumen
@@ -91,7 +101,7 @@ namespace relasi_playlist {
      * @param L list relasi yang sedang dioperasikan
      * @param p address playlist yang relasinya ingin dihapus
      */
-    void deletePlaylist(List &L, playlist::address p);
+    void deletePlaylist(List &L, playlist::address &p);
 }
 
 #endif //TUBES_STD_RELASIPLAYLIST_H

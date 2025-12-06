@@ -47,6 +47,16 @@ namespace relasi_user {
     address allocateElm(user::address u, playlist::address p);
 
     /**
+     * I.S. list yang ingin diperiksa diberikan sebagai argumen
+     *
+     * F.S. fungsi mengembalikan status apakah list kosong atau tidak sebagai boolean
+     *
+     * @param L list yang sedang dioperasikan
+     * @return status apakah list kosong (true) atau tidak (false)
+     */
+    bool isEmpty(List L);
+
+    /**
      * I.S. list yang ingin dioperasikan dan address elemen relasi yang ingin ditambahkan diberikan sebagai argumen
      *
      * F.S. address elemen relasi yang ingin ditambahkan disimpan sebagai elemen terakhir pada list

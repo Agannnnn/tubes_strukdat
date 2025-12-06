@@ -38,10 +38,20 @@ namespace relasi_penyanyi {
      * F.S. fungsi mengembalikan address elemen relasi yang berisi address penyanyi dan address lagu
      *
      * @param p address elemen penyanyi
-     * @param a address elemen lagu
+     * @param l address elemen lagu
      * @return address elemen relasi penyanyi dengan lagu
      */
-    address allocateElm(penyanyi::address p, lagu::address a);
+    address allocateElm(penyanyi::address p, lagu::address l);
+
+    /**
+     * I.S. list yang ingin diperiksa diberikan sebagai argumen
+     *
+     * F.S. fungsi mengembalikan status apakah list kosong atau tidak sebagai boolean
+     *
+     * @param L list yang sedang dioperasikan
+     * @return status apakah list kosong (true) atau tidak (false)
+     */
+    bool isEmpty(List L);
 
     /**
      * I.S. list yang ingin dioperasikan dan address elemen relasi yang ingin ditambahkan diberikan sebagai argumen
