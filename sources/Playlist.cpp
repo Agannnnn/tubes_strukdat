@@ -1,6 +1,7 @@
 #include "../headers/Playlist.h"
 
-#include "../headers/RelasiPlaylistLagu.h"
+#include "../headers/PlaylistMusic.h"
+#include "../headers/UserPlaylist.h"
 
 
 namespace playlist {
@@ -9,9 +10,9 @@ namespace playlist {
         list.last = nullptr;
     }
 
-    addr allocateElm(Infotype info) {
+    addr allocateElm(string title) {
         addr e = new Elm();
-        e->info = info;
+        e->title = title;
         e->next = nullptr;
         e->prev = nullptr;
         return e;
@@ -21,31 +22,35 @@ namespace playlist {
         return list.first == nullptr && list.last == nullptr;
     }
 
-    void insertAfter(List &list, addr baru, addr sebelum) {
-        if (sebelum == list.last) {
-            sebelum->next = baru;
-            baru->prev = sebelum;
-            list.last = baru;
+    void insertAfter(List &list, addr &newElm, addr &prevElm) {
+        if (prevElm == list.last) {
+            prevElm->next = newElm;
+            newElm->prev = prevElm;
+            list.last = newElm;
         } else {
-            baru->next = sebelum->next;
-            baru->prev = sebelum;
-            baru->next->prev = baru;
-            sebelum->next = baru;
+            newElm->next = prevElm->next;
+            newElm->prev = prevElm;
+            newElm->next->prev = newElm;
+            prevElm->next = newElm;
         }
     }
 
-    void insertLast(List &list, addr baru) {
+    void insertLast(List &list, addr &elm, user::addr user, user_playlist::List &userPlaylist) {
         if (isEmpty(list)) {
-            list.first = baru;
-            list.last = baru;
+            list.first = elm;
+            list.last = elm;
         } else {
-            baru->prev = list.last;
-            list.last->next = baru;
-            list.last = baru;
+            elm->prev = list.last;
+            list.last->next = elm;
+            list.last = elm;
         }
+
+        user_playlist::addr up = user_playlist::allocateElm(user, elm);
+        user_playlist::insertLast(userPlaylist, up);
     }
 
-    void remove(List &list, addr &elm, relasi_playlist_lagu::List &listRelasi) {
+    void remove(List &list, addr &elm, playlist_music::List &playlistMusicRelation,
+                user_playlist::List &userPlaylistRelation) {
         if (list.first == elm && list.last == elm) {
             list.first = nullptr;
             list.last = nullptr;
@@ -63,19 +68,21 @@ namespace playlist {
         elm->prev = nullptr;
         elm->next = nullptr;
 
-        relasi_playlist_lagu::removePlaylist(listRelasi, elm);
-
-        delete elm;
+        playlist_music::removePlaylist(playlistMusicRelation, elm);
+        user_playlist::removePlaylist(userPlaylistRelation, elm);
     }
 
-    addr find(List list, string judul) {
+    addr find(List list, string title) {
+        if (isEmpty(list)) return nullptr;
+
         addr p = list.first;
-        bool kondisi = false;
-        while (p != nullptr && !kondisi) {
-            if (p->info.judul == judul) {
-                kondisi = true;
+        bool found = false;
+        while (p != nullptr && !found) {
+            if (p->title == title) {
+                found = true;
+            } else {
+                p = p->next;
             }
-            p = p->next;
         }
         return p;
     }

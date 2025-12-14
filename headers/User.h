@@ -2,93 +2,94 @@
 #define TUBES_STD_USER_H
 
 #include <iostream>
+#include "ADT.h"
 
 using namespace std;
 
 namespace user {
-    typedef struct Elm *addr;
-
-    struct Infotype {
-        string username;
-        string password;
-        string namaPanjang;
-    };
-
-    struct Elm {
-        Infotype info;
-        addr next;
-        addr prev;
-    };
-
-    struct List {
-        addr first;
-        addr last;
-    };
-
     /**
-     * i.s. list diberikan sebagai argumen
+     * i.s. list terdefinisi tapi belum diinisialisasi.
      *
-     * f.s. list diinisialisasi: first dan last bernilai nullptr
-     * @param list list yang dioperasikan
+     * f.s. list terinisialisasi.
+     * @param list list yang dioperasikan.
      */
     void createList(List &list);
 
     /**
-     * i.s. nilai diberikan sebagai argumen
+     * i.s. info (data user) terdefinisi.
      *
-     * f.s. fungsi mengembalikan address dari elmeen yang baru dibuat
-     * @param info nilai dari elemen
-     * @return address elemen yang dibuat
+     * f.s. mengembalikan address dari elemen user yang telah dibuat. nullptr jika alokasi gagal.
+     * @param info data user yang akan disimpan pada elemen.
+     * @return address elemen user.
      */
     addr allocateElm(Infotype info);
 
     /**
-     * i.s. list diberikan sebagai argumen
+     * i.s. list terdefinisi.
      *
-     * f.s. fungsi mengembalikan nilai boolean yang menandakan apakah list kosong atau tidak
-     * @param list list yang dioperasikan
-     * @return status apakah list kosong (true) atau tidak (false)
+     * f.s. mengembalikan status kosong list. true jika list tidak memiliki node.
+     * @param list list yang dioperasikan.
+     * @return status kosong list.
      */
     bool isEmpty(List list);
 
     /**
-     * i.s. list, elemen baru, dan elemen penanda diberikan sebagai argumen. List berisikan elemen-elemen tanpa elemen baru
+     * i.s. list, newElm, dan prevElm terdefinisi. prevElm berada di dalam list.
      *
-     * f.s. list diperbarui dengan elemen yang ingin ditambahkan disimpen setelah elemen penanda
-     * @param list list yang dioperasikan
-     * @param baru address elemen yang ingin ditambahkan
-     * @param sebelum address elemen penanda
+     * f.s. newElm disisipkan setelah prevElm dalam list.
+     * @param list list yang dioperasikan.
+     * @param newElm address elemen yang ingin disisipkan.
+     * @param prevElm address elemen sebelumnya tempat penyisipan.
      */
-    void insertAfter(List &list, addr baru, addr sebelum);
+    void insertAfter(List &list, addr &newElm, addr &prevElm);
 
     /**
-     * i.s. list diberikan sebagai arguman. List berisikan elemen-elemen tanpa elemen baru
+     * i.s. list dan newElm terdefinisi.
      *
-     * f.s. list diperbarui dengan elemen yang ingin ditambahkan disimpan pada urutan paling belakang
-     * @param list list yang dioperasikan
-     * @param baru address elemen yang ingin ditambahkan
+     * f.s. newElm ditambahkan sebagai node terakhir dalam list.
+     * @param list list yang dioperasikan.
+     * @param newElm address elemen yang ingin ditambah.
      */
-    void insertLast(List &list, addr baru);
+    void insertLast(List &list, addr &newElm);
 
     /**
-     * i.s. list diberikan sebagai argumen. List berisikan elemen-elemen termasuk elemen yang ingin dihapus
+     * i.s. list dan elm terdefinisi. elm berada di dalam list. userPlaylistRelation terdefinisi.
      *
-     * f.s. list diperbarui dengan elmen yang ingin dihapus hilang dari list, dan elemen-elemen tetangganya digeser
-     * @param list list yang dioperasikan
-     * @param elm address elemen yang ingin dihapus
+     * f.s. elm dibuang dari list dan relasi-relasi yang melibatkan elm dihapus dari userPlaylistRelation.
+     * @param list list yang dioperasikan.
+     * @param elm address elemen user yang ingin dihapus.
+     * @param userPlaylistRelation relasi user-playlist yang harus diperbarui.
      */
-    void remove(List &list, addr elm);
+    void remove(List &list, addr &elm, user_playlist::List &userPlaylistRelation);
 
     /**
-     * i.s. list, username dan password diberikan sebagai argumen
+     * i.s. list terdefinisi.
      *
-     * f.s. fungsi mengembalikan address elemen dengan username dan password yang sama atau nullptr jika tidak ada elemen dengan kombinasi yang sama
-     * @param list list yang dioperasikan
-     * @param username username user yang dicari
-     * @param password password user yang dicari
-     * @return address elemen user yang berisikan username dan password yang dicari
+     * f.s. prosedur akan mengeluarkan output daftar user yang ada pada list.
+     * @param list list yang akan ditampilkan.
+     */
+    void list(List &list);
+
+    /**
+     * i.s. list, username, dan password terdefinisi.
+     *
+     * f.s. mengembalikan address user yang cocok dengan username dan password. nullptr jika tidak ditemukan.
+     * @param list list yang dioperasikan.
+     * @param username username user yang dicari.
+     * @param password kata sandi yang dicocokkan.
+     * @return address user jika ditemukan, nullptr jika tidak.
      */
     addr find(List list, string username, string password);
+
+    /**
+     * i.s. list dan username terdefinisi.
+     *
+     * f.s. mengembalikan address admin dengan username yang diberikan. nullptr jika tidak ditemukan atau bukan admin.
+     * @param list list yang dioperasikan.
+     * @param username username user yang dicari.
+     * @return address user jika ditemukan, nullptr jika tidak.
+     */
+    addr findAdmin(List list, string username);
 }
 
 #endif //TUBES_STD_USER_H

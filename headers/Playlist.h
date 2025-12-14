@@ -1,92 +1,79 @@
 #ifndef TUBES_STD_PLAYLIST_H
 #define TUBES_STD_PLAYLIST_H
 
-#include "RelasiPlaylistLagu.h"
+#include "ADT.h"
 
 using namespace std;
 
 namespace playlist {
-    typedef struct Elm *addr;
-
-    struct Infotype {
-        string judul;
-    };
-
-    struct Elm {
-        Infotype info;
-        addr next;
-        addr prev;
-    };
-
-    struct List {
-        addr first;
-        addr last;
-    };
-
     /**
-     * i.s. list diberikan sebagai argumen
+     * i.s. list terdefinisi tapi belum diinisialisasi.
      *
-     * f.s. list diinisialisasi: first dan last bernilai nullptr
-     * @param list list yang dioperasikan
+     * f.s. list terinisialisasi.
+     * @param list list yang dioperasikan.
      */
     void createList(List &list);
 
     /**
-     * i.s. nilai diberikan sebagai argumen
+     * i.s. info (judul playlist) terdefinisi.
      *
-     * f.s. fungsi mengembalikan address dari elmeen yang baru dibuat
-     * @param info nilai dari elemen
-     * @return address elemen yang dibuat
+     * f.s. mengembalikan address dari elemen playlist yang telah dibuat. nullptr jika alokasi gagal.
+     * @param info judul playlist yang akan disimpan pada elemen.
+     * @return address elemen playlist.
      */
-    addr allocateElm(Infotype info);
+    addr allocateElm(string info);
 
     /**
-     * i.s. list diberikan sebagai argumen
+     * i.s. list terdefinisi.
      *
-     * f.s. fungsi mengembalikan nilai boolean yang menandakan apakah list kosong atau tidak
-     * @param list list yang dioperasikan
-     * @return status apakah list kosong (true) atau tidak (false)
+     * f.s. mengembalikan status kosong list. true jika list tidak memiliki node.
+     * @param list list yang dioperasikan.
+     * @return status kosong list.
      */
     bool isEmpty(List list);
 
     /**
-     * i.s. list, elemen baru, dan elemen penanda diberikan sebagai argumen. List berisikan elemen-elemen tanpa elemen baru
+     * i.s. list, newElm, dan prevElm terdefinisi. prevElm berada di dalam list.
      *
-     * f.s. list diperbarui dengan elemen yang ingin ditambahkan disimpen setelah elemen penanda
-     * @param list list yang dioperasikan
-     * @param baru address elemen yang ingin ditambahkan
-     * @param sebelum address elemen penanda
+     * f.s. newElm disisipkan setelah prevElm dalam list.
+     * @param list list yang dioperasikan.
+     * @param newElm address elemen yang ingin disisipkan.
+     * @param prevElm address elemen sebelumnya tempat penyisipan.
      */
-    void insertAfter(List &list, addr baru, addr sebelum);
+    void insertAfter(List &list, addr &newElm, addr &prevElm);
 
     /**
-     * i.s. list diberikan sebagai arguman. List berisikan elemen-elemen tanpa elemen baru
+     * i.s. list, elm, user, dan userPlaylist terdefinisi.
      *
-     * f.s. list diperbarui dengan elemen yang ingin ditambahkan disimpan pada urutan paling belakang
-     * @param list list yang dioperasikan
-     * @param baru address elemen yang ingin ditambahkan
+     * f.s. elm ditambahkan sebagai node terakhir dalam list dan relasi user-playlist dibuat dalam userPlaylist.
+     * @param list list yang dioperasikan.
+     * @param elm address elemen yang ingin ditambah.
+     * @param user address user pemilik playlist.
+     * @param userPlaylist relasi user-playlist yang akan diperbarui.
      */
-    void insertLast(List &list, addr baru);
+    void insertLast(List &list, addr &elm, user::addr user, user_playlist::List &userPlaylist);
 
     /**
-     * i.s. list dan relasi playlist-lagu diberikan sebagai argumen. List berisikan elemen-elemen termasuk elemen yang ingin dihapus
+     * i.s. list dan elm terdefinisi. elm berada di dalam list. playlistMusicRelation dan userPlaylistRelation terdefinisi.
      *
-     * f.s. list diperbarui dengan elmen yang ingin dihapus hilang dari list, dan elemen-elemen tetangganya digeser. Relasi playlist-lagu yang terkait juga dihapus
-     * @param list list yang dioperasikan
-     * @param elm address elemen yang ingin dihapus
-     * @param listRelasi relasi playlist-lagu yang akan diperbarui
+     * f.s. elm dibuang dari list dan relasi-relasi yang melibatkan elm dihapus dari playlistMusicRelation dan userPlaylistRelation.
+     * @param list list yang dioperasikan.
+     * @param elm address elemen playlist yang ingin dihapus.
+     * @param playlistMusicRelation relasi playlist-music yang harus diperbarui.
+     * @param userPlaylistRelation relasi user-playlist yang harus diperbarui.
      */
-    void remove(List & list, addr & elm, relasi_playlist_lagu::List & listRelasi);
+    void remove(List &list, addr &elm, playlist_music::List &playlistMusicRelation,
+                user_playlist::List &userPlaylistRelation);
 
     /**
-     * i.s. list, judul playlist diberikan sebagai argumen
+     * i.s. list dan title terdefinisi.
      *
-     * f.s. fungsi mengembalikan address elemen dengan judul yang sama atau nullptr jika tidak ada elemen dengan judul yang sama
-     * @param list list yang dioperasikan
-     * @param judul judul playlist yang dicari
-     * @return address elemen playlist yang berisikan judul yang dicari
+     * f.s. mengembalikan address playlist dengan judul yang cocok. nullptr jika tidak ditemukan.
+     * @param list list yang dioperasikan.
+     * @param title judul playlist yang dicari.
+     * @return address playlist jika ditemukan, nullptr jika tidak.
      */
-    addr find(List list, string judul);
+    addr find(List list, string title);
 }
 
 #endif //TUBES_STD_PLAYLIST_H
