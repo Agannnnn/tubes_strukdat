@@ -84,7 +84,7 @@ namespace user {
     /**
      * i.s. list dan username terdefinisi.
      *
-     * f.s. mengembalikan address admin dengan username yang diberikan. nullptr jika tidak ditemukan atau bukan admin.
+     * f.s. mengembalikan address user dengan username yang diberikan. nullptr jika tidak ditemukan
      * @param list list yang dioperasikan.
      * @param username username user yang dicari.
      * @return address user jika ditemukan, nullptr jika tidak.

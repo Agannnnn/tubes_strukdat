@@ -54,9 +54,11 @@ namespace playlist {
     void insertLast(List &list, addr &elm, user::addr user, user_playlist::List &userPlaylist);
 
     /**
-     * i.s. list dan elm terdefinisi. elm berada di dalam list. playlistMusicRelation dan userPlaylistRelation terdefinisi.
+     * i.s. list dan elm terdefinisi. elm berada di dalam list. playlistMusicRelation dan userPlaylistRelation
+     * terdefinisi.
      *
-     * f.s. elm dibuang dari list dan relasi-relasi yang melibatkan elm dihapus dari playlistMusicRelation dan userPlaylistRelation.
+     * f.s. elm dibuang dari list dan relasi-relasi yang melibatkan elm dihapus dari playlistMusicRelation
+     * dan userPlaylistRelation.
      * @param list list yang dioperasikan.
      * @param elm address elemen playlist yang ingin dihapus.
      * @param playlistMusicRelation relasi playlist-music yang harus diperbarui.

@@ -148,6 +148,48 @@ namespace user_menu {
             string keyword = "";
 
             switch (ipt) {
+                case PLAY:
+                    if (queue::isEmpty(musicQueue)) {
+                        printf("+%s+\n", string(98, '-').c_str());
+                        printf("| %-96s |\n", "Music queue is still empty");
+                        printf("+%s+\n", string(98, '-').c_str());
+                        break;
+                    }
+                    if (currentSong == nullptr || queue::find(musicQueue, currentSong->music->info.title) == nullptr) {
+                        currentSong = musicQueue.first;
+                    }
+                    music = sf::Music(currentSong->music->info.filePath);
+                    music.play();
+                    break;
+                case PAUSE:
+                    music.pause();
+                    break;
+                case NEXT:
+                    if (currentSong == nullptr) break;
+                    if (currentSong->next == nullptr) {
+                        printf("+%s+\n", string(98, '-').c_str());
+                        printf("| %-96s |\n", "It's the end of the queue");
+                        printf("+%s+\n", string(98, '-').c_str());
+                        break;
+                    }
+                    music.stop();
+                    currentSong = currentSong->next;
+                    music = sf::Music(currentSong->music->info.filePath);
+                    music.play();
+                    break;
+                case PREV:
+                    if (currentSong == nullptr) break;
+                    if (currentSong->prev == nullptr) {
+                        printf("+%s+\n", string(98, '-').c_str());
+                        printf("| %-96s |\n", "It's the start of the queue");
+                        printf("+%s+\n", string(98, '-').c_str());
+                        break;
+                    }
+                    music.stop();
+                    currentSong = currentSong->prev;
+                    music = sf::Music(currentSong->music->info.filePath);
+                    music.play();
+                    break;
                 case DEQUEUE:
                     cout << "> Music title: ";
                     cin >> keyword;

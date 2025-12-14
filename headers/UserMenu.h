@@ -12,6 +12,10 @@ using namespace std;
 namespace user_menu {
     enum UserOption {
         QUIT,
+        PLAY,
+        PAUSE,
+        PREV,
+        NEXT,
         DEQUEUE,
         CLEAR_QUEUE,
         MUSIC_LIBRARY,
@@ -56,7 +60,8 @@ namespace user_menu {
     /**
      * i.s. daftar user terdefinisi, activeUser dan back mungkin belum diinisialisasi.
      *
-     * f.s. jika login berhasil, activeUser diisi dengan address user yang sesuai; jika pengguna memilih kembali, back diset true.
+     * f.s. jika login berhasil, activeUser diisi dengan address user yang sesuai; jika pengguna memilih kembali,
+     * back diset true.
      * @param users daftar user yang akan diperiksa.
      * @param activeUser address user aktif yang akan diubah ketika login berhasil.
      * @param back flag untuk kembali ke menu sebelumnya.
@@ -74,7 +79,8 @@ namespace user_menu {
     /**
      * i.s. users, library, playlists, playlistMusic, userPlaylist, singerMusic, dan artists terdefinisi.
      *
-     * f.s. menampilkan menu home untuk navigasi fitur pengguna; prosedur dapat memanggil sub-prosedur lain dan mengubah state (mis. currentSong atau queue) sesuai aksi pengguna.
+     * f.s. menampilkan menu home untuk navigasi fitur pengguna; prosedur dapat memanggil sub-prosedur lain
+     * dan mengubah state (mis. currentSong atau queue) sesuai aksi pengguna.
      * @param users daftar user.
      * @param library graf koleksi musik.
      * @param playlists daftar playlist.
@@ -90,7 +96,8 @@ namespace user_menu {
     /**
      * i.s. library, currentSong, musicQueue, singers, singerMusic, dan music terdefinisi.
      *
-     * f.s. menampilkan koleksi musik dan mengizinkan kontrol pemutaran; currentSong dan musicQueue dapat diubah sesuai aksi (enqueue/dequeue/play/pause dll.).
+     * f.s. menampilkan koleksi musik dan mengizinkan kontrol pemutaran; currentSong dan musicQueue dapat diubah
+     * sesuai aksi (enqueue/dequeue/play/pause dll.).
      * @param library graf koleksi musik.
      * @param currentSong address lagu yang sedang/akan diputar.
      * @param musicQueue antrian musik pengguna yang dapat dimodifikasi.
@@ -104,7 +111,8 @@ namespace user_menu {
     /**
      * i.s. activeUser, currentSong, musicQueue, library, playlists, playlistMusic, userPlaylist, dan music terdefinisi.
      *
-     * f.s. menampilkan daftar playlist milik user dan menyediakan opsi pemutaran atau pengelolaan playlist; prosedur dapat mengubah currentSong, musicQueue, dan data playlist sesuai aksi pengguna.
+     * f.s. menampilkan daftar playlist milik user dan menyediakan opsi pemutaran atau pengelolaan playlist;
+     * prosedur dapat mengubah currentSong, musicQueue, dan data playlist sesuai aksi pengguna.
      * @param activeUser user yang sedang aktif.
      * @param currentSong address lagu yang sedang/akan diputar.
      * @param musicQueue antrian musik yang dapat dimodifikasi.
@@ -121,7 +129,8 @@ namespace user_menu {
     /**
      * i.s. ePlaylist, library, dan playlistMusic terdefinisi.
      *
-     * f.s. memungkinkan perubahan pada ePlaylist (judul, penambahan/penghapusan musik) dan memperbarui playlistMusic sesuai perubahan.
+     * f.s. memungkinkan perubahan pada ePlaylist (judul, penambahan/penghapusan musik) dan memperbarui playlistMusic
+     * sesuai perubahan.
      * @param ePlaylist address playlist yang akan diubah.
      * @param library graf koleksi musik.
      * @param playlistMusic relasi playlist-music yang mungkin diperbarui.

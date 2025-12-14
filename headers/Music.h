@@ -66,7 +66,8 @@ namespace music {
     /**
      * i.s. fromVertex, toVertex, dan category terdefinisi.
      *
-     * f.s. mengembalikan status koneksi antara dua vertex. true jika terdapat edge dari fromVertex ke toVertex pada kategori tersebut.
+     * f.s. mengembalikan status koneksi antara dua vertex. true jika terdapat edge dari fromVertex ke toVertex
+     * pada kategori tersebut.
      * @param fromVertex vertex asal.
      * @param toVertex vertex tujuan.
      * @param category kategori edge yang diperiksa.
