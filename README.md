@@ -13,107 +13,90 @@
 - menghapus antrian lagu,
 - memperbarui antrian lagu (tambah & hapus lagu),
 - memiliki dua jenis pengguna (admin & user),
-- memutar lagu (kalau sempat).
+- memutar lagu
 
-## 2. Spesifikasi:
+## 2. Cara menggunakan
 
-- Doubly Linked List (DLL):
+### Input Lagu
 
-```c++
-typedef struct Elm *addr;
+1. Masuk sebagai admin
+2. Pilih opsi koleksi lagu
+3. Pilih menu insert lagu
+4. Masukkan data lagu (jangan lupa simpan file lagu pada folder assets)
+5. Masukkan nama path file lagu dengan format `../assets/nama_file.mp3`
 
-struct Infotype {};
+### Edit lagu
 
-struct Elm {
-    Infotype info;
-    addr next;
-    addr prev;
-};
+1. Masuk sebagai admin
+2. Pilih opsi koleksi lagu
+3. Pilih opsi update lagu
+4. Masukkan judul lagu yang ingin diupdate
+5. Masukkan data baru lagu tersebut
+6. Simpan
 
-struct List {
-    addr first;
-    addr last;
-};
+### Hapus lagu
 
-void createList(List &list);
-addr allocateElm(Infotype info);
-bool isEmpty(List list);
-void insertAfter(List &list, addr baru, addr sebelum);
-void insertLast(List &list, addr baru);
-void remove(List &list, addr elm);
-addr find(List list, Infotype info); // atau ganti jadi salah satu atribut
-```
+1. Masuk sebagai admin
+2. Pilih opsi koleksi lagu
+3. Pilih opsi hapus lagu
+4. Masukkan judul lagu yang ingin diupdate
+5. Konfirmasi
 
-- Multi Linked List (MLL):
+### Hapus penyanyi
 
-```c++
-typedef struct Elm *addr;
+1. Masuk sebagai penyanyi (artist)
+2. Pilih opsi hapus penyanyi
+3. Masukkan nama penyanyi
+4. Konfirmasi
 
-struct Elm {
-    addrNode1 node1;
-    addrNode2 node2;
-    addr next;
-    addr prev;
-};
+### Hapus user
 
-struct List {
-    addr first;
-    addr last;
-};
+1. Masuk sebagai admin
+2. Pilih opsi hapus user
+3. Masukkan nama user
+4. Konfirmasi
 
-void createList(List &list);
-addr allocateElm(addrNode1 node1, addrNode2 node2);
-bool isEmpty(List list);
-void insertLast(List &list, addr baru);
-void remove(List &list, addr elm);
-addr findNode1(List list, InfotypeNode1 info); // atau ganti jadi salah satu atribut
-addr findNode2(List list, InfotypeNode2 info); // atau ganti jadi salah satu atribut
-void removeNode1(List &list, addrNode1 node1);
-void removeNode2(List &list, addrNode2 node2);
-void displayNode1(List list, addrNode1 node1);
-void displayNode2(List list, addrNode2 node2);
-```
+### Registrasi user
 
-- Graph (hanya untuk lagu):
+1. Masuk sebagai user
+2. Pilih opsi signup
+2. Masukkan username, password, dan nama panjang
+3. Konfirmasi
 
-```c++
-typedef struct Vertex *addr;
-typedef struct Edge *edge;
+### Putar lagu
 
-struct Edge {
-    addr node;
-    edge next;
-};
+1. Masuk sebagai user
+2. Registrasi user
+3. Pilih opsi login
+4. Pilih opsi koleksi lagu
+5. Pilih salah satu dari opsi enqueue satu, seluruh, dan seluruh lagu dengan genre atau bahasa yang sama
+6. Pilih opsi play untuk memutar lagu
+7. Pilih opsi pause untuk menghentikan lagu sementara
+8. Pilih opsi next dan prev untuk memutar lagu setelah dan sebelum lagu sekarang
 
-struct Infotype {
-    string judul;
-    string penyanyi;
-    string album;
-    int durasi;
-    string genre;
-    string bahasa;
-    edge nextGenre;
-    edge nextBahasa;
-};
+### Buat playlist
 
-struct Vertex {
-    Infotype info;
-    edge nextLagu;
-};
+1. Masuk sebagai user
+2. Login user
+3. Pilih opsi playlist
+4. Pilih opsi buat playlist baru
+5. Masukkan nama playlist
 
-struct Graph {
-    addr first;
-};
+### Masukkan lagu pada playlist (update playlsit)
 
-void createGraph(Graph &graph);
-addr allocateNode(Infotype info);
-addr allocateEdge(addr node);
-bool isEmpty(Graph graph);
-void insertNode(Graph &G, addr node);
-void connectNode(addr &node1, addr node2);
-void disconnectNode(addr &node1, addr node2);
-void connectNodeGenre(addr &node1, addr node2);
-void disconnectNodeGenre(addr &node1, addr node2);
-void connectNodeBahasa(addr &node1, addr node2);
-void disconnectNodeBahasa(addr &node1, addr node2);
-```
+1. Masuk sebagai user
+2. Login user
+3. Pilih opsi playlist
+4. Pilih opsi update playlist
+5. Pilih opsi tambah lagu
+6. Masukkan judul lagu
+7. Konfirmasi
+
+### Hapus playlist
+
+1. Masuk sebagai user
+2. Login user
+3. Pilih opsi playlist
+4. Pilih opsi hapus playlist
+5. Masukkan nama playlist
+6. Konfirmasi
