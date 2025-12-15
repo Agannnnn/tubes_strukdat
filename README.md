@@ -15,7 +15,17 @@
 - memiliki dua jenis pengguna (admin & user),
 - memutar lagu
 
-## 2. Cara menggunakan
+## 2. Instruksi instalasi
+
+Clone repositori program ini ke komputer lokal menggunakan
+
+```bash
+git clone https://github.com/Agannnnn/tubes_strukdat.git
+```
+
+Lalu buka CodeBlocks ataupun IDE lainnya untuk membuka program, lalu jalankan program
+
+## 3. Cara menggunakan
 
 ### Input Lagu
 
