@@ -37,6 +37,7 @@ namespace singer_music {
     }
 
     void remove(List &list, addr &elm) {
+        cout << 3 << "started" << endl;
         if (list.first == elm && list.last == elm) {
             list.first = nullptr;
             list.last = nullptr;
@@ -50,9 +51,13 @@ namespace singer_music {
             elm->prev->next = elm->next;
             elm->next->prev = elm->prev;
         }
+        cout << 3 << "middle" << endl;
 
-        elm->prev = nullptr;
-        elm->next = nullptr;
+        printf("address %p, %p", elm->prev, elm->next);
+        // elm->prev = nullptr;
+        // elm->next = nullptr;
+
+        cout << 3 << "Completed" << endl;
     }
 
     void removeMusic(List &list, music::addr music) {

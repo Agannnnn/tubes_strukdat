@@ -23,6 +23,7 @@ namespace admin_menu {
             printf("| %-96s |\n", (to_string(LIST_ARTISTS) + ". Artists ").c_str());
             printf("| %-96s |\n", (to_string(LIST_USERS) + ". Users").c_str());
             printf("| %-96s |\n", (to_string(QUIT) + ". Logout").c_str());
+            printf("+%s+\n", string(98, '-').c_str());
 
             int ipt;
             cin >> ipt;
@@ -245,7 +246,7 @@ namespace admin_menu {
                         cout << "> Debut year: ";
                         cin >> debut;
 
-                        eArtist = artists::allocateElm({eMusic->info.title, debut});
+                        eArtist = artists::allocateElm({eMusic->info.artist, debut});
                         artists::insertLast(artists, eArtist);
                     }
 
@@ -302,14 +303,17 @@ namespace admin_menu {
         cin >> ipt;
         if (ipt == 1) {
             artists::addr eArtist = artists::find(artists, eMusic->info.artist);
-            singer_music::addr eSingerMusic = singer_music::find(artistMusic, eArtist, eMusic);
-            singer_music::remove(artistMusic, eSingerMusic);
+            if (eArtist != nullptr) {
+                if (!queue::isEmpty(singer_music::listMusic(artistMusic, eArtist))) {
+                    artists::remove(artists, eArtist, artistMusic);
+                }
+                singer_music::addr eSingerMusic = singer_music::find(artistMusic, eArtist, eMusic);
+                if (eSingerMusic != nullptr) {
+                    singer_music::remove(artistMusic, eSingerMusic);
+                }
+            }
 
             playlist_music::removeMusic(playlistMusic, eMusic);
-
-            if (queue::isEmpty(singer_music::listMusic(artistMusic, eArtist))) {
-                artists::remove(artists, eArtist, artistMusic);
-            }
 
             music::deleteVertex(library, eMusic, music::GENRE);
             music::deleteVertex(library, eMusic, music::LANGUAGE);

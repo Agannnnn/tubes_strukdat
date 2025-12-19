@@ -69,9 +69,8 @@ namespace artists {
 
     void display(List list) {
         addr elm1 = list.first;
-        cout << "daftar penyanyi" << endl;
         while (elm1 != nullptr) {
-            cout << elm1->info.name << " (" << elm1->info.debutYear << ")" << endl;
+            printf("| %-89s (%4d) |\n", elm1->info.name.c_str(), elm1->info.debutYear);
             elm1 = elm1->next;
         }
     }

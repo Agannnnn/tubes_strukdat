@@ -134,6 +134,10 @@ namespace user_menu {
             printf("| WELCOME %-88s |\n", activeUser->info.fullName.c_str());
             printf("+%s+\n", string(98, '-').c_str());
             queue::display(musicQueue);
+            printf("| %-96s |\n", (to_string(PLAY) + ". Play current music").c_str());
+            printf("| %-96s |\n", (to_string(PAUSE) + ". Pause current music").c_str());
+            printf("| %-96s |\n", (to_string(PREV) + ". Play prev music").c_str());
+            printf("| %-96s |\n", (to_string(NEXT) + ". Play next music").c_str());
             printf("| %-96s |\n", (to_string(DEQUEUE) + ". Dequeue one music").c_str());
             printf("| %-96s |\n", (to_string(CLEAR_QUEUE) + ". Clear queue").c_str());
             printf("| %-96s |\n", (to_string(MUSIC_LIBRARY) + ". Music library").c_str());
@@ -357,7 +361,7 @@ namespace user_menu {
                     break;
                 case M_ENQUEUE_LANGUAGE:
                     if (music::isEmpty(library)) break;
-                    musicList = music::listBy(library, library.first, music::GENRE);
+                    musicList = music::listBy(library, library.first, music::LANGUAGE);
                     queue::joinQueue(musicQueue, musicList);
                     break;
                 case M_ENQUEUE_ARTIST:
